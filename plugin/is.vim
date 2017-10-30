@@ -16,10 +16,10 @@ function! s:is_search() abort
   return getcmdtype() =~# '[/\?]'
 endfunction
 
-cnoremap <expr> <Plug>(is-scroll-forwards)  <SID>is_search() ? is#scroll(1) : ''
-cnoremap <expr> <Plug>(is-scroll-backwards) <SID>is_search() ? is#scroll(0) : ''
-noremap  <expr> <Plug>(is-scroll-forwards)  is#scroll_count(1, @/) . 'nzz'
-noremap  <expr> <Plug>(is-scroll-backwards) is#scroll_count(0, @/) . 'Nzz'
+cnoremap <expr> <Plug>(is-scroll-f)  <SID>is_search() ? is#scroll(1) : ''
+cnoremap <expr> <Plug>(is-scroll-b) <SID>is_search() ? is#scroll(0) : ''
+noremap  <expr> <Plug>(is-scroll-f)  is#scroll_count(1, @/) . 'nzz'
+noremap  <expr> <Plug>(is-scroll-b) is#scroll_count(0, @/) . 'Nzz'
 
 " Execute :nohlsearch after one cursor move or other autocmd events.
 noremap <expr> <Plug>(is-nohl-1) is#auto_nohlsearch(1)
@@ -51,10 +51,10 @@ endif
 
 if get(g:, 'is#do_default_mappings', 1)
   if mapcheck("\<C-j>", 'c') ==# ''
-    cmap <C-j> <Plug>(is-scroll-forwards)
+    cmap <C-j> <Plug>(is-scroll-f)
   endif
   if mapcheck("\<C-k>", 'c') ==# ''
-    cmap <C-k> <Plug>(is-scroll-backwards)
+    cmap <C-k> <Plug>(is-scroll-b)
   endif
   for s:map in ['n', 'N', '*', '#', 'g*', 'g#']
     if mapcheck(s:map, '') ==# ''
