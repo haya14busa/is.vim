@@ -7,7 +7,7 @@ is.vim is successor of [incsearch.vim](https://github.com/haya14busa/incsearch.v
 
 'is' is abbreviation of 'incsearch'.
 
-## :sparkes: Feature :sparkes:
+## :sparkles: Feature :sparkles:
 
 ### Automatically clear highlight (|:nohlsearch|) after cursor moved and some other autocmd event.
 
