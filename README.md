@@ -34,7 +34,7 @@ map N <Plug>(is-nohl)<Plug>(anzu-N-with-echo)
 ### Integration of vim-asterisk
 https://github.com/haya14busa/vim-asterisk provides improved * motions.
 
-- * motion without cursor move
+- star (`*`) without cursor move
 - visual star feature (search selected text)
 - etc..
 
