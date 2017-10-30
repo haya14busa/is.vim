@@ -1,0 +1,89 @@
+Describe is
+
+  Describe auto-nohlsearch
+    Before each
+      silent! autocmd! plugin-is-auto-nohlsearch-internal
+      silent! autocmd! plugin-is-auto-nohlsearch-internal-on-insert-leave
+    End
+
+    Describe is#auto_nohlsearch
+      It CursorMoved (N=10)
+        let N = 10
+        Assert Equals(is#auto_nohlsearch(N), '')
+        for _ in range(N - 1)
+          doautocmd CursorMoved
+          Assert True(exists('#plugin-is-auto-nohlsearch-internal#CursorMoved'))
+        endfor
+        doautocmd CursorMoved
+        Assert False(exists('#plugin-is-auto-nohlsearch-internal#CursorMoved'))
+      End
+
+      It Insert Events
+        call is#auto_nohlsearch(1)
+        Assert True(exists('#plugin-is-auto-nohlsearch-internal#InsertEnter'))
+        doautocmd InsertEnter
+        Assert False(exists('#plugin-is-auto-nohlsearch-internal#InsertEnter'))
+        Assert True(exists('#plugin-is-auto-nohlsearch-internal-on-insert-leave#InsertLeave'))
+        doautocmd InsertLeave
+        Assert False(exists('#plugin-is-auto-nohlsearch-internal-on-insert-leave#InsertLeave'))
+
+        Assert True(exists('#plugin-is-auto-nohlsearch-internal#CursorMoved'))
+        doautocmd CursorMoved
+        Assert False(exists('#plugin-is-auto-nohlsearch-internal#CursorMoved'))
+      End
+    End
+
+    It CmdlineLeave
+      new
+      let line = 'vim vim vim'
+      put! =line
+      execute 'normal!' "/vim\<CR>"
+      Assert True(exists('#plugin-is-auto-nohlsearch-internal#CursorMoved'))
+      " For cursor move of '/'
+      doautocmd CursorMoved
+      Assert True(exists('#plugin-is-auto-nohlsearch-internal#CursorMoved'))
+      doautocmd CursorMoved
+      Assert False(exists('#plugin-is-auto-nohlsearch-internal#CursorMoved'))
+      bwipe!
+    End
+
+    It <Plug>(is-nohl-1)
+      execute 'normal' "\<Plug>(is-nohl-1)"
+      Assert True(exists('#plugin-is-auto-nohlsearch-internal#CursorMoved'))
+      doautocmd CursorMoved
+      Assert False(exists('#plugin-is-auto-nohlsearch-internal#CursorMoved'))
+    End
+
+    It <Plug>(is-nohl-2)
+      execute 'normal' "\<Plug>(is-nohl-2)"
+      Assert True(exists('#plugin-is-auto-nohlsearch-internal#CursorMoved'))
+      doautocmd CursorMoved
+      Assert True(exists('#plugin-is-auto-nohlsearch-internal#CursorMoved'))
+      doautocmd CursorMoved
+      Assert False(exists('#plugin-is-auto-nohlsearch-internal#CursorMoved'))
+    End
+
+    It <Plug>(is-nohl)
+      execute 'normal' "\<Plug>(is-nohl)"
+      Assert True(exists('#plugin-is-auto-nohlsearch-internal#CursorMoved'))
+      doautocmd CursorMoved
+      Assert True(exists('#plugin-is-auto-nohlsearch-internal#CursorMoved'))
+      doautocmd CursorMoved
+      Assert False(exists('#plugin-is-auto-nohlsearch-internal#CursorMoved'))
+    End
+
+
+    It <Plug>(is-nohl-3)
+      execute 'normal' "\<Plug>(is-nohl-3)"
+      Assert True(exists('#plugin-is-auto-nohlsearch-internal#CursorMoved'))
+      doautocmd CursorMoved
+      Assert True(exists('#plugin-is-auto-nohlsearch-internal#CursorMoved'))
+      doautocmd CursorMoved
+      Assert True(exists('#plugin-is-auto-nohlsearch-internal#CursorMoved'))
+      doautocmd CursorMoved
+      Assert False(exists('#plugin-is-auto-nohlsearch-internal#CursorMoved'))
+    End
+
+  End
+
+End
