@@ -1,0 +1,103 @@
+*is.txt*	incremental search improved
+
+Author  : haya14busa <haya14busa@gmail.com>
+Version : 0.9.0
+License : MIT license {{{
+
+  Copyright (c) 2017 haya14busa
+
+  Permission is hereby granted, free of charge, to any person obtaining
+  a copy of this software and associated documentation files (the
+  "Software"), to deal in the Software without restriction, including
+  without limitation the rights to use, copy, modify, merge, publish,
+  distribute, sublicense, and/or sell copies of the Software, and to
+  permit persons to whom the Software is furnished to do so, subject to
+  the following conditions:
+  The above copyright notice and this permission notice shall be
+  included in all copies or substantial portions of the Software.
+
+  THE SOFTWARE IS PROVIDED "AS IS", WITHOUT WARRANTY OF ANY KIND,
+  EXPRESS OR IMPLIED, INCLUDING BUT NOT LIMITED TO THE WARRANTIES OF
+  MERCHANTABILITY, FITNESS FOR A PARTICULAR PURPOSE AND NONINFRINGEMENT.
+  IN NO EVENT SHALL THE AUTHORS OR COPYRIGHT HOLDERS BE LIABLE FOR ANY
+  CLAIM, DAMAGES OR OTHER LIABILITY, WHETHER IN AN ACTION OF CONTRACT,
+  TORT OR OTHERWISE, ARISING FROM, OUT OF OR IN CONNECTION WITH THE
+  SOFTWARE OR THE USE OR OTHER DEALINGS IN THE SOFTWARE.
+
+}}}
+
+==============================================================================
+CONTENTS				*is-contents*
+
+INTRODUCTION		|is-introduction|
+INTERFACE		|is-interface|
+	Key Mappings		|is-key-mappings|
+	Options			|is-options|
+
+==============================================================================
+INTRODUCTION				*is-introduction*
+
+*is.vim* improves search feature. is.vim is successor of incsearch.vim[1]
+'is' is abbreviation of 'incsearch'.
+
+- Automatically clear after cursor is moved and some other autocmd event.
+- Incremental scroll to next match feature.
+
+[1]: https://github.com/haya14busa/incsearch.vim
+
+==============================================================================
+INTERFACE				*is-interface*
+------------------------------------------------------------------------------
+KEY MAPPINGS				*is-key-mappings*
+
+c_<Plug>(is-scroll-f)				*c_<Plug>(is-scroll-f)*
+c_<Plug>(is-scroll-b)				*c_<Plug>(is-scroll-b)*
+	Scroll forwards/backwards and jump to the next match while incremental
+	searching. No need to press <C-g>/<C-t> repetitively if you want to
+	skip the matches in the current windows!
+
+	<Plug>(is-scroll-f): Scroll forwards (downwards). default: <C-j>
+	<Plug>(is-scroll-b): Scroll backwards (upwards).  default: <C-k>
+
+<Plug>(is-nohl)					*<Plug>(is-nohl)*
+<Plug>(is-nohl-1)				*<Plug>(is-nohl-1)*
+<Plug>(is-nohl-2)				*<Plug>(is-nohl-2)*
+<Plug>(is-nohl-3)				*<Plug>(is-nohl-3)*
+						*<Plug>(is-nohl-N)*
+	Automatically clear highlight (execute |:nohlsearch|) after N cursor
+	moves or other autocmd events (InsertEnter and InsertLeave).
+	<Plug>(is-nohl) is alias of <Plug>(is-nohl-2).
+
+	Integration of |anzu.txt|:
+	https://github.com/osyo-manga/vim-anzu >
+		map n <Plug>(is-nohl)<Plug>(anzu-n-with-echo)
+		map N <Plug>(is-nohl)<Plug>(anzu-N-with-echo)
+<
+	Integration of |asterisk.txt| example:
+	https://github.com/haya14busa/vim-asterisk >
+		map *  <Plug>(asterisk-z*)<Plug>(is-nohl-1)
+		map g* <Plug>(asterisk-gz*)<Plug>(is-nohl-1)
+		map #  <Plug>(asterisk-z#)<Plug>(is-nohl-1)
+		map g# <Plug>(asterisk-gz#)<Plug>(is-nohl-1)
+<
+<Plug>(is-n)					*<Plug>(is-n)*
+<Plug>(is-N)					*<Plug>(is-N)*
+<Plug>(is-*)					*<Plug>(is-star)*
+<Plug>(is-#)					*<Plug>(is-#)*
+<Plug>(is-g*)					*<Plug>(is-gstar)*
+<Plug>(is-g#)					*<Plug>(is-g#)*
+	These mappings are simple alias like the mapping below.
+>
+		map <Plug>(is-n)  <Plug>(is-nohl)n
+		map <Plug>(is-N)  <Plug>(is-nohl)N
+		...
+<
+------------------------------------------------------------------------------
+OPTIONS					*is-options*
+
+g:is#do_default_mappings		*g:is#do_default_mappings*
+			Default: 1
+	Set this option to 0 if you want to disable the default mappings.
+
+==============================================================================
+vim:tw=78:ts=8:ft=help:norl:noet:fen:fdl=0:fdm=marker:
