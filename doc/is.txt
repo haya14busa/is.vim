@@ -40,7 +40,8 @@ INTRODUCTION				*is-introduction*
 *is.vim* improves search feature. is.vim is successor of incsearch.vim[1]
 'is' is abbreviation of 'incsearch'.
 
-- Automatically clear after cursor is moved and some other autocmd event.
+- Automatically clear highlight (|:nohlsearch|) after cursor is moved and some
+  other autocmd event.
 - Incremental scroll to next match feature.
 
 [1]: https://github.com/haya14busa/incsearch.vim
