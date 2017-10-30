@@ -1,6 +1,8 @@
 ## is.vim - incremental search improved
 
 [![Build Status](https://travis-ci.org/haya14busa/is.vim.svg?branch=master)](https://travis-ci.org/haya14busa/is.vim)
+[![](http://img.shields.io/badge/license-MIT-blue.svg)](LICENSE)
+[![](http://img.shields.io/badge/doc-%3Ah%20is.txt-red.svg)](doc/is.txt)
 
 is.vim improves search feature.
 is.vim is successor of [incsearch.vim](https://github.com/haya14busa/incsearch.vim).
