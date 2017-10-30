@@ -43,3 +43,8 @@ map #  <Plug>(asterisk-z#)<Plug>(is-nohl-1)
 map g# <Plug>(asterisk-gz#)<Plug>(is-nohl-1)
 ```
 
+## :bird: Author :bird:
+haya14busa (https://github.com/haya14busa)
+
+## :blue_book: Document :blue_book:
+[:h is.vim](doc/is.txt)
