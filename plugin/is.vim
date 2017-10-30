@@ -49,5 +49,20 @@ if exists('##CmdlineLeave')
   augroup END
 endif
 
+if get(g:, 'is#do_default_mappings', 1)
+  if mapcheck("\<C-j>", 'c') ==# ''
+    cmap <C-j> <Plug>(is-scroll-forwards)
+  endif
+  if mapcheck("\<C-k>", 'c') ==# ''
+    cmap <C-k> <Plug>(is-scroll-backwards)
+  endif
+  for s:map in ['n', 'N', '*', '#', 'g*', 'g#']
+    if mapcheck(s:map, '') ==# ''
+      execute printf(':map %s <Plug>(is-%s)', s:map, s:map)
+    endif
+  endfor
+  unlet s:map
+endif
+
 " __END__
 " vim: expandtab softtabstop=2 shiftwidth=2 foldmethod=marker
