@@ -17,7 +17,7 @@ is.vim is successor of [incsearch.vim](https://github.com/haya14busa/incsearch.v
 
 ### Incremental scroll to next match feature.
 
-![is-scroll](https://raw.githubusercontent.com/haya14busa/i/37cb1f7eec116eeb43768103bcfa0853b0bddddb/is.vim/is-auto-nohlsearch.gif)
+![is-scroll](https://raw.githubusercontent.com/haya14busa/i/37cb1f7eec116eeb43768103bcfa0853b0bddddb/is.vim/is-scroll.gif)
 
 ## :electric_plug: Integration :electric_plug:
 
