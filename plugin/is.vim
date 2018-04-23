@@ -43,7 +43,7 @@ map <Plug>(is-#)  <Plug>(is-nohl)<Plug>(_is-#)
 map <Plug>(is-g*) <Plug>(is-nohl)<Plug>(_is-g*)
 map <Plug>(is-g#) <Plug>(is-nohl)<Plug>(_is-g#)
 
-if exists('##CmdlineLeave')
+if exists('##CmdlineLeave') && get(g:, 'is#auto_nohlsearch', 1)
   augroup plugin-is
     autocmd!
     autocmd CmdlineLeave [/\?] :call is#auto_nohlsearch(2)
