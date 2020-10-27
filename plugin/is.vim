@@ -16,16 +16,17 @@ function! s:is_search() abort
   return getcmdtype() =~# '[/\?]'
 endfunction
 
-cnoremap <expr> <Plug>(is-scroll-f)  <SID>is_search() ? is#scroll(1) : ''
+cnoremap <expr> <Plug>(is-scroll-f) <SID>is_search() ? is#scroll(1) : ''
 cnoremap <expr> <Plug>(is-scroll-b) <SID>is_search() ? is#scroll(0) : ''
-noremap  <expr> <Plug>(is-scroll-f)  is#scroll_count(1, @/) . 'nzz'
+noremap  <expr> <Plug>(is-scroll-f) is#scroll_count(1, @/) . 'nzz'
 noremap  <expr> <Plug>(is-scroll-b) is#scroll_count(0, @/) . 'Nzz'
 
 " Execute :nohlsearch after one cursor move or other autocmd events.
 noremap <expr> <Plug>(is-nohl-1) is#auto_nohlsearch(1)
 noremap <expr> <Plug>(is-nohl-2) is#auto_nohlsearch(2)
-map            <Plug>(is-nohl) <Plug>(is-nohl-2)
 noremap <expr> <Plug>(is-nohl-3) is#auto_nohlsearch(3)
+
+map <Plug>(is-nohl) <Plug>(is-nohl-2)
 
 " To avoid recursive mapping.
 noremap <Plug>(_is-n)  n
@@ -57,8 +58,14 @@ if get(g:, 'is#do_default_mappings', 1)
     cmap <C-k> <Plug>(is-scroll-b)
   endif
   for s:map in ['n', 'N', '*', '#', 'g*', 'g#']
-    if mapcheck(s:map, '') ==# ''
-      execute printf(':map %s <Plug>(is-%s)', s:map, s:map)
+    if mapcheck(s:map, 'n') ==# ''
+      execute printf(':nmap %s <Plug>(is-%s)', s:map, s:map)
+    endif
+    if mapcheck(s:map, 'x') ==# ''
+      execute printf(':xmap %s <Plug>(is-%s)', s:map, s:map)
+    endif
+    if mapcheck(s:map, 'o') ==# ''
+      execute printf(':omap %s <Plug>(is-%s)', s:map, s:map)
     endif
   endfor
   unlet s:map
