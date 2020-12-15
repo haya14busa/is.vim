@@ -35,6 +35,8 @@ noremap <Plug>(_is-*)  *
 noremap <Plug>(_is-#)  #
 noremap <Plug>(_is-g*) g*
 noremap <Plug>(_is-g#) g#
+noremap <Plug>(_is-gd) gd
+noremap <Plug>(_is-gD) gD
 
 map <Plug>(is-n)  <Plug>(is-nohl)<Plug>(_is-n)
 map <Plug>(is-N)  <Plug>(is-nohl)<Plug>(_is-N)
@@ -42,6 +44,8 @@ map <Plug>(is-*)  <Plug>(is-nohl)<Plug>(_is-*)
 map <Plug>(is-#)  <Plug>(is-nohl)<Plug>(_is-#)
 map <Plug>(is-g*) <Plug>(is-nohl)<Plug>(_is-g*)
 map <Plug>(is-g#) <Plug>(is-nohl)<Plug>(_is-g#)
+map <Plug>(is-gd) <Plug>(is-nohl)<Plug>(_is-gd)
+map <Plug>(is-gD) <Plug>(is-nohl)<Plug>(_is-gD)
 
 if exists('##CmdlineLeave')
   augroup plugin-is
@@ -57,7 +61,7 @@ if get(g:, 'is#do_default_mappings', 1)
   if mapcheck("\<C-k>", 'c') ==# ''
     cmap <C-k> <Plug>(is-scroll-b)
   endif
-  for s:map in ['n', 'N', '*', '#', 'g*', 'g#']
+  for s:map in ['n', 'N', '*', '#', 'g*', 'g#', 'gd', 'gD']
     if mapcheck(s:map, 'n') ==# ''
       execute printf(':nmap %s <Plug>(is-%s)', s:map, s:map)
     endif
