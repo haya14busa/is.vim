@@ -43,7 +43,7 @@ map <Plug>(is-#)  <Plug>(is-nohl)<Plug>(_is-#)
 map <Plug>(is-g*) <Plug>(is-nohl)<Plug>(_is-g*)
 map <Plug>(is-g#) <Plug>(is-nohl)<Plug>(_is-g#)
 
-if exists('##CmdlineLeave')
+if exists('##CmdlineLeave') && get(g:, 'is#auto_nohlsearch', 1)
   augroup plugin-is
     autocmd!
     autocmd CmdlineLeave [/\?] :call is#auto_nohlsearch(2)
@@ -57,17 +57,19 @@ if get(g:, 'is#do_default_mappings', 1)
   if mapcheck("\<C-k>", 'c') ==# ''
     cmap <C-k> <Plug>(is-scroll-b)
   endif
-  for s:map in ['n', 'N', '*', '#', 'g*', 'g#']
-    if mapcheck(s:map, 'n') ==# ''
-      execute printf(':nmap %s <Plug>(is-%s)', s:map, s:map)
-    endif
-    if mapcheck(s:map, 'x') ==# ''
-      execute printf(':xmap %s <Plug>(is-%s)', s:map, s:map)
-    endif
-    if mapcheck(s:map, 'o') ==# ''
-      execute printf(':omap %s <Plug>(is-%s)', s:map, s:map)
-    endif
-  endfor
+  if get(g:, 'is#auto_nohlsearch', 1)
+    for s:map in ['n', 'N', '*', '#', 'g*', 'g#']
+      if mapcheck(s:map, 'n') ==# ''
+        execute printf(':nmap %s <Plug>(is-%s)', s:map, s:map)
+      endif
+      if mapcheck(s:map, 'x') ==# ''
+        execute printf(':xmap %s <Plug>(is-%s)', s:map, s:map)
+      endif
+      if mapcheck(s:map, 'o') ==# ''
+        execute printf(':omap %s <Plug>(is-%s)', s:map, s:map)
+      endif
+    endfor
+  endif
   unlet s:map
 endif
 
