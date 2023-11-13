@@ -154,7 +154,9 @@ function! s:auto_nohlsearch(after_n_moves) abort
     execute join([
     \   'autocmd CursorMoved *'
     \ , repeat('autocmd plugin-is-auto-nohlsearch-internal CursorMoved * ', a:after_n_moves - 1)
-    \ , 'call feedkeys("\<Plug>(_is-nohlsearch)", "m")'
+    \ , 'if ! exists("*win_gettype") || win_gettype(winnr()) != "popup"'
+    \ , '| call feedkeys("\<Plug>(_is-nohlsearch)", "m")'
+    \ , '| endif'
     \ , '| autocmd! plugin-is-auto-nohlsearch-internal'
     \ ], ' ')
   augroup END
